@@ -35,9 +35,9 @@ fun HomeNavGraph(navController: NavHostController, padding: Modifier) {
             TreatmentScreen(
                 navigateToMeasurement = {
                     Graph.MEDICATION
-            }, navigateToMedication = {
+                }, navigateToMedication = {
                     navController.navigate(Graph.MEDICATION)
-            }
+                }
             )
         }
         MeasurementNav(navController = navController)
@@ -53,8 +53,9 @@ fun NavGraphBuilder.MedicationNav(
         route = Graph.MEDICATION,
     ) {
         composable(route = ScreenTreatment.Medication.route) {
-            MedicationScreen( navigateBack = {
+            MedicationScreen(navigateBack = {
                 navController.popBackStack()
+
             })
         }
     }

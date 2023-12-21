@@ -25,14 +25,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            WatermelonMigrasiTheme{
-//                RootNavigationGraph(navController = rememberNavController())
+            WatermelonMigrasiTheme {
+
                 navController = rememberNavController()
                 NavGraph(
                     navController = navController
                 )
                 AuthState()
-//                BottomNavigationBar()
             }
         }
     }
@@ -66,9 +65,10 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun NavigateToVerifyEmailScreen() = navController.navigate(Screen.VerifyEmailScreen.route) {
-        popUpTo(navController.graph.id) {
-            inclusive = true
+    private fun NavigateToVerifyEmailScreen() =
+        navController.navigate(Screen.VerifyEmailScreen.route) {
+            popUpTo(navController.graph.id) {
+                inclusive = true
+            }
         }
-    }
 }

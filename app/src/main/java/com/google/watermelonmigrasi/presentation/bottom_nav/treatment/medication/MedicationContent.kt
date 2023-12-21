@@ -62,7 +62,20 @@ fun MedicationContent1(
         }
     )
 
-    val options = listOf("IU", "ampoule(s)", "capsule(s)", "inhaler(s)", "mg(s)", "ml(s)", "patch(s)", "puff(s)", "spray(s)", "tablet(s)", "unit(s)",  "pill(s)")
+    val options = listOf(
+        "IU",
+        "ampoule(s)",
+        "capsule(s)",
+        "inhaler(s)",
+        "mg(s)",
+        "ml(s)",
+        "patch(s)",
+        "puff(s)",
+        "spray(s)",
+        "tablet(s)",
+        "unit(s)",
+        "pill(s)"
+    )
     val keyboard = LocalSoftwareKeyboardController.current
     var unit by remember { mutableStateOf(options[0]) }
     var expanded by rememberSaveable { mutableStateOf(false) }
@@ -124,7 +137,8 @@ fun MedicationContent1(
                     setDrug(name.text, unit)
                 },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White),
+                    contentColor = Color.White
+                ),
 
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
@@ -140,11 +154,12 @@ fun MedicationContent1(
         }
     }
 }
+
 @Preview
 @Composable
 fun MedicationContentPreview() {
     WatermelonMigrasiTheme {
-        MedicationContent1( setDrug = { Name, Unit -> })
+        MedicationContent1(setDrug = { Name, Unit -> })
     }
 }
 
@@ -152,10 +167,10 @@ fun MedicationContentPreview() {
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 fun MedicationContent2(
 //    padding: PaddingValues,
-    setDay: ( day: String) -> Unit,
+    setDay: (day: String) -> Unit,
 ) {
 
-    val options = listOf("Once daily", "Twice daily", "On demand" )
+    val options = listOf("Once daily", "Twice daily", "On demand")
     val keyboard = LocalSoftwareKeyboardController.current
     var day by remember { mutableStateOf(options[0]) }
     var expanded by rememberSaveable { mutableStateOf(false) }
@@ -203,14 +218,19 @@ fun MedicationContent2(
 
         }
         Spacer(modifier = Modifier.height(30.dp))
-        Box(modifier = Modifier.wrapContentHeight(Alignment.Bottom).padding(25.dp, 0.dp, 25.dp, 0.dp)) {
+        Box(
+            modifier = Modifier
+                .wrapContentHeight(Alignment.Bottom)
+                .padding(25.dp, 0.dp, 25.dp, 0.dp)
+        ) {
             Button(
                 onClick = {
                     keyboard?.hide()
                     setDay(day)
                 },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White),
+                    contentColor = Color.White
+                ),
 
                 shape = RoundedCornerShape(50.dp),
                 modifier = Modifier
@@ -231,7 +251,7 @@ fun MedicationContent2(
 @Composable
 fun MedicationContent2Preview() {
     WatermelonMigrasiTheme {
-        MedicationContent2( setDay = {  day -> })
+        MedicationContent2(setDay = { day -> })
     }
 }
 
@@ -302,53 +322,53 @@ fun MedicationContent3(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
             ) {
-                    AlertDialog(
+                AlertDialog(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(size = 12.dp)
+                        ),
+                    onDismissRequest = { expanded = false }
+                ) {
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth()
                             .background(
-                                color = MaterialTheme.colorScheme.surface,
-                                shape = RoundedCornerShape(size = 12.dp)
+                                color = Color.LightGray.copy(alpha = 0.3f)
                             ),
-                        onDismissRequest = { expanded = false }
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Column(
+
+                        TimeInput(state = timePickerState)
+
+
+                        Row(
                             modifier = Modifier
-                                .background(
-                                    color = Color.LightGray.copy(alpha = 0.3f)
-                                ),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
+                                .padding(top = 12.dp)
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
                         ) {
+                            // dismiss button
+                            TextButton(onClick = { expanded = false }) {
+                                Text(text = "Dismiss")
+                            }
 
-                            TimeInput(state = timePickerState, )
-
-
-                            Row(
-                                modifier = Modifier
-                                    .padding(top = 12.dp)
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.End
+                            // confirm button
+                            TextButton(
+                                onClick = {
+                                    expanded = false
+                                    selectedHour = timePickerState.hour
+                                    selectedMinute = timePickerState.minute
+                                }
                             ) {
-                                // dismiss button
-                                TextButton(onClick = { expanded = false }) {
-                                    Text(text = "Dismiss")
-                                }
-
-                                // confirm button
-                                TextButton(
-                                    onClick = {
-                                        expanded = false
-                                        selectedHour = timePickerState.hour
-                                        selectedMinute = timePickerState.minute
-                                    }
-                                ) {
-                                    Text(text = "Confirm")
-                                }
+                                Text(text = "Confirm")
                             }
                         }
                     }
                 }
             }
+        }
         Spacer(modifier = Modifier.height(25.dp))
         DosisField(
             dosis = dosis,
@@ -364,11 +384,9 @@ fun MedicationContent3(
 @Composable
 fun MedicationContent3Preview() {
     WatermelonMigrasiTheme {
-        MedicationContent3( setTime = { time, dosis -> })
+        MedicationContent3(setTime = { time, dosis -> })
     }
 }
-
-
 
 @Composable
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)

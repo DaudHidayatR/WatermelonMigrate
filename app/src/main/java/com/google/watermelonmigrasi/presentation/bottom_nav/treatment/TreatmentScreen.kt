@@ -163,7 +163,6 @@ fun BottomSheetContent(
                     Icon(imageVector = Icons.Default.Favorite, contentDescription = null)
                 },
                 modifier = Modifier.clickable(onClick = navigateToMeasurement)
-
             )
         }
         item {

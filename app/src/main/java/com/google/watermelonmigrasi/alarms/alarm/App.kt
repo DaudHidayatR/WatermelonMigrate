@@ -1,4 +1,4 @@
-package com.google.watermelonmigrasi
+package com.google.watermelonmigrasi.alarms.alarm
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -6,11 +6,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import com.google.watermelonmigrasi.alarms.alarm.NotifikasiService
-import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp
-class FirebaseSignInWithEmailAndPasswordApp : Application() {
+class App : Application() {
+
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
